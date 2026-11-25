@@ -1,0 +1,30 @@
+name: Publish build to release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: tsr-linux-1.02
+          path: .
+          run-id: 45545660051
+          github-token: ${{ github.token }}
+
+      - name: Upload to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh release view linux-add-asia-1.02 >/dev/null 2>&1 \
+            && gh release upload linux-add-asia-1.02 tsr-linux-1.02.tar.gz --clobber \
+            || gh release create linux-add-asia-1.02 tsr-linux-1.02.tar.gz \
+                 --title "Linux runtime, add-asia-1.02" \
+                 --notes "Linux x86-64 runtime built by GitHub Actions (Ubuntu 20.04 container). Unofficial build with CUSA18093 1.02 Asia support. Extract and run run.sh; game data is not included."
