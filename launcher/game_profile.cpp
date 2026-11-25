@@ -14,6 +14,8 @@ constexpr PackageLayer kEuropeUpdate101Layers[] = {{"01.00", "01.01", false}, {"
 constexpr PackageLayer kJapanUpdate103Layers[] = {{"01.00", "01.00", false}, {"01.03", "01.00", true}};
 constexpr PackageLayer kJapanUpdate104Layers[] = {{"01.00", "01.00", false}, {"01.04", "01.00", true}};
 constexpr PackageLayer kAsiaBaseLayers[] = {{"01.00", "01.01", false}};
+// The 2025 Asian reissue is a standalone base package again (CATEGORY gd): APP_VER 01.00, VERSION 01.02.
+constexpr PackageLayer kAsia102Layers[] = {{"01.00", "01.02", false}};
 
 constexpr const char* kBaseFiles[] = {"ROBO_FR.CPK", "ROBO_GE.CPK", "ROBO_IT.CPK", "ROBO_SP.CPK"};
 // Each update is laid over the base alone. 1.01 opens ROBO_PATCH_US.CPK, 1.02 also ROBO_PATCH2%s.CPK.
@@ -28,6 +30,7 @@ constexpr const char* kUpdate102Files[] = {
 constexpr const char* kJapanUpdate103Files[] = {"ROBO_PATCH.CPK", "ROBO_PATCH2.CPK", "sce_discmap_patch.plt"};
 constexpr const char* kJapanUpdate104Files[] = {"ROBO_PATCH.CPK", "sce_discmap_patch.plt"};
 constexpr const char* kAsiaFiles[] = {"ROBO_TW.CPK"};
+constexpr const char* kAsiaFiles102[] = {"ROBO_TW.CPK", "ROBO_PATCH2_CN.CPK", "ROBO_PATCH2_KO.CPK", "ROBO_PATCH2_TW.CPK"};
 // EUR 1.01 also comes repackaged for older firmware: the same game, its eboot.bin differing only in the SDK version.
 constexpr const char* kEuropeUpdate101Alternates[] = {"123730cd2ee9b1ebbed4a6cc2fe7854154aad82645ef12da15d7e34b82da6b28"};
 
@@ -180,6 +183,13 @@ constexpr GameBuild kGameBuilds[] = {
      .eboot_sha256 = "dd6d54e99b1246dbecd1fa9556bf90e58fe6ff5cfdf01f010bfd9a4c6c572bcf", .regional_archive = "ROBO_CN.CPK",
      .extra_files = kAsiaFiles, .label = "CUSA18093 1.00 Asia", .region = "Asia", .layers = kAsiaBaseLayers,
      .resolution_sites = kResolutionSitesAsia100, .text_languages = kAsianLanguages,
+     .prompt_archives = kAsiaPromptArchives, .english_voices = false, .prompt_patch = "asia-1.00", .voice_archive = "ROBO_CN.CPK"},
+    // The 2025 Asian reissue (CUSA18093 VERSION 01.02, a gd package). Its executable differs from 1.00, so its
+    // feature sites are not yet located: it renders at its native size until they are added.
+    {.title_id = "CUSA18093", .content_id = kAsiaContent, .version = "1.02", .folder = "CUSA18093-1.02",
+     .eboot_sha256 = "4efe0907a8705486ad123c938729c775fa32ed3f4875a82f75b8b5672a8ea1d6", .regional_archive = "ROBO_CN.CPK",
+     .extra_files = kAsiaFiles102, .label = "CUSA18093 1.02 Asia", .region = "Asia", .layers = kAsia102Layers,
+     .resolution_sites = {}, .text_languages = kAsianLanguages,
      .prompt_archives = kAsiaPromptArchives, .english_voices = false, .prompt_patch = "asia-1.00", .voice_archive = "ROBO_CN.CPK"},
 };
 
