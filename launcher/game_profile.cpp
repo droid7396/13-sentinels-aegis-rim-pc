@@ -199,7 +199,7 @@ constexpr GameBuild kGameBuilds[] = {
     {.title_id = "CUSA18093", .content_id = kAsiaContent, .version = "1.02", .folder = "CUSA18093-1.02",
      .eboot_sha256 = "4efe0907a8705486ad123c938729c775fa32ed3f4875a82f75b8b5672a8ea1d6", .regional_archive = "ROBO_CN.CPK",
      .extra_files = kAsiaFiles102, .label = "CUSA18093 1.02 Asia", .region = "Asia", .layers = kAsia102Layers,
-     .resolution_sites = {}, .text_languages = kAsianLanguages,
+     .resolution_sites = kResolutionSitesAsia102, .text_languages = kAsianLanguages,
      .prompt_archives = kAsiaPromptArchives, .english_voices = false, .prompt_patch = "asia-1.00", .voice_archive = "ROBO_CN.CPK"},
 };
 
