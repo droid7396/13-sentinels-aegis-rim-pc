@@ -78,6 +78,7 @@ static const BuildSite kBuilds[] = {
     {"CUSA10602-1.03", &kFallThrough, 0x3af6c5, 0x36f480},
     {"CUSA10602-1.04", &kFallThrough, 0x368d02, 0x329db0},
     {"CUSA18093-1.00", &kRegisterTest, 0x3b9bc5, 0x37a840},
+    {"CUSA18093-1.02", &kFallThrough, 0x368e02, 0x32ab60},
 };
 
 static atomic_int armed;
