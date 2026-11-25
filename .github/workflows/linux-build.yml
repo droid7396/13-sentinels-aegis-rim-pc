@@ -1,0 +1,57 @@
+name: Linux build
+
+on:
+  push:
+    branches: [add-asia-1.02]
+  workflow_dispatch:
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:20.04
+
+    steps:
+      - name: Bootstrap container
+        run: |
+          sed -i 's|//archive.ubuntu.com|//old-releases.ubuntu.com|g; s|//security.ubuntu.com|//old-releases.ubuntu.com|g' /etc/apt/sources.list
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends git ca-certificates curl gnupg
+
+      - uses: actions/checkout@v4
+
+      - name: Prepare toolchain (ci-deps.sh)
+        run: bash packaging/linux/ci-deps.sh
+
+      - name: Build
+        env:
+          CC: clang
+          CXX: clang++
+        run: bash tools/build.sh
+
+      - name: Package tarball
+        run: |
+          set -e
+          mkdir -p dist/tsr-linux/bin dist/tsr-linux/lib
+          exe=build/cmake/linux/bin/13_sentinels_aegis_rim
+          cp "$exe" dist/tsr-linux/bin/
+          ldd "$exe" | awk '{print $3}' | grep -E '^/' | while read -r so; do
+            case "$so" in
+              /lib/x86_64-linux-gnu/*|/usr/lib/x86_64-linux-gnu/*) ;;  # system libraries: the host provides them
+              *) cp -n "$so" dist/tsr-linux/lib/ ;;
+            esac
+          done
+          cat > dist/tsr-linux/run.sh <<'EOF'
+          #!/bin/sh
+          DIR=$(dirname "$(readlink -f "$0")")
+          export LD_LIBRARY_PATH="$DIR/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+          exec "$DIR/bin/13_sentinels_aegis_rim" "$@"
+          EOF
+          chmod +x dist/tsr-linux/run.sh dist/tsr-linux/bin/13_sentinels_aegis_rim
+          tar -czf tsr-linux-1.02.tar.gz -C dist tsr-linux
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tsr-linux-1.02
+          path: tsr-linux-1.02.tar.gz
+          retention-days: 30
