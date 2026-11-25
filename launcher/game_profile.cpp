@@ -126,14 +126,15 @@ constexpr TsrResolutionSite kResolutionSitesAsia100[] = {
     {0x6883bc, 1, {0xb9}, 2160, kHeight}, {0x6883c1, 1, {0xb8}, 1080, kHeight},
 };
 
-// CUSA18093 1.02: the same four mov pairs, relocated; located by structural match against the 1.00 table.
+// CUSA18093 1.02: the same four mov pairs, relocated; located by structural match against the 1.00 table
+// (boot.bin file offsets 0x784cd7.. minus its TSRBOOT1 header, 0x1c9bb8 bytes, whose end the image size fills exactly).
 constexpr TsrResolutionSite kResolutionSitesAsia102[] = {
-    {0x784cd7, 1, {0xb8}, 1920, kWidth},  {0x784cdc, 1, {0xb9}, 3840, kWidth},
-    {0x784cf2, 1, {0xb8}, 1080, kHeight}, {0x784cf7, 1, {0xb9}, 2160, kHeight},
-    {0x784e2e, 1, {0xb8}, 1080, kHeight}, {0x784e33, 1, {0xb9}, 2160, kHeight},
-    {0x784e49, 1, {0xb8}, 1920, kWidth},  {0x784e4e, 1, {0xb9}, 3840, kWidth},
-    {0x7855c4, 1, {0xb9}, 3840, kWidth},  {0x7855c9, 1, {0xb8}, 1920, kWidth},
-    {0x7855e4, 1, {0xb9}, 2160, kHeight}, {0x7855e9, 1, {0xb8}, 1080, kHeight},
+    {0x5bb11f, 1, {0xb8}, 1920, kWidth},  {0x5bb124, 1, {0xb9}, 3840, kWidth},
+    {0x5bb13a, 1, {0xb8}, 1080, kHeight}, {0x5bb13f, 1, {0xb9}, 2160, kHeight},
+    {0x5bb276, 1, {0xb8}, 1080, kHeight}, {0x5bb27b, 1, {0xb9}, 2160, kHeight},
+    {0x5bb291, 1, {0xb8}, 1920, kWidth},  {0x5bb296, 1, {0xb9}, 3840, kWidth},
+    {0x5bba0c, 1, {0xb9}, 3840, kWidth},  {0x5bba11, 1, {0xb8}, 1920, kWidth},
+    {0x5bba2c, 1, {0xb9}, 2160, kHeight}, {0x5bba31, 1, {0xb8}, 1080, kHeight},
 };
 
 constexpr char kUsaContent[] = "UP0177-CUSA19610_00-13SENTINELSEFIGS";
