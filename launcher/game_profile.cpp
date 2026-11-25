@@ -126,6 +126,16 @@ constexpr TsrResolutionSite kResolutionSitesAsia100[] = {
     {0x6883bc, 1, {0xb9}, 2160, kHeight}, {0x6883c1, 1, {0xb8}, 1080, kHeight},
 };
 
+// CUSA18093 1.02: the same four mov pairs, relocated; located by structural match against the 1.00 table.
+constexpr TsrResolutionSite kResolutionSitesAsia102[] = {
+    {0x784cd7, 1, {0xb8}, 1920, kWidth},  {0x784cdc, 1, {0xb9}, 3840, kWidth},
+    {0x784cf2, 1, {0xb8}, 1080, kHeight}, {0x784cf7, 1, {0xb9}, 2160, kHeight},
+    {0x784e2e, 1, {0xb8}, 1080, kHeight}, {0x784e33, 1, {0xb9}, 2160, kHeight},
+    {0x784e49, 1, {0xb8}, 1920, kWidth},  {0x784e4e, 1, {0xb9}, 3840, kWidth},
+    {0x7855c4, 1, {0xb9}, 3840, kWidth},  {0x7855c9, 1, {0xb8}, 1920, kWidth},
+    {0x7855e4, 1, {0xb9}, 2160, kHeight}, {0x7855e9, 1, {0xb8}, 1080, kHeight},
+};
+
 constexpr char kUsaContent[] = "UP0177-CUSA19610_00-13SENTINELSEFIGS";
 constexpr char kEuropeContent[] = "EP0177-CUSA19620_00-13SENTINELSEFIGS";
 constexpr char kJapanContent[] = "JP0005-CUSA10602_00-13K0000000000000";
