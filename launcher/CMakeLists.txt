@@ -68,7 +68,7 @@ add_custom_command(OUTPUT ${TSR_PAGE_ICON_SOURCE}
 target_sources(tsr_launcher_core PRIVATE ${TSR_PAGE_ICON_SOURCE})
 
 # The Xbox controller icon patches (prompts/xbox-prompts-<key>.dcpx) as byte arrays, prompts_patch.h: key=symbol.
-foreach(entry 1.00=100 1.02=102 eu-1.00=Europe100 jp-1.00=Japan100 jp-1.03=Japan103 jp-1.04=Japan104 asia-1.00=Asia100)
+foreach(entry 1.00=100 1.02=102 eu-1.00=Europe100 jp-1.00=Japan100 jp-1.03=Japan103 jp-1.04=Japan104 asia-1.00=Asia100 asia-1.02=Asia102)
     string(REPLACE "=" ";" parts ${entry})
     list(GET parts 0 key)
     list(GET parts 1 symbol)

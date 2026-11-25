@@ -129,7 +129,18 @@ def build_asia(orig, templates, font):
     return {'xbox-prompts-asia-1.00.dcpx': atlases + manual}
 
 
-REGIONS = {'usa': build_usa, 'eu': build_eu, 'jp': build_jp, 'asia': build_asia}
+def build_asia_102(orig, templates, font):
+    # 1.02 reads its atlas from the ROBO_PATCH2 archives (the manual pages stay in the base ones, which this atlas-only
+    # patch leaves alone; the Asian language packs carry no English manual pages to match icons against).
+    return {'xbox-prompts-asia-1.02.dcpx': [
+        atlas_target('ROBO_PATCH2_CN.CPK', 'gui/interface.ftx', orig / 'pCN/gui/interface.ftx',
+                     orig / 'pCN/gui/interface.mbs', 'cn102', font),
+        atlas_target('ROBO_PATCH2_TW.CPK', 'gui/interface.ftx', orig / 'pTW/gui/interface.ftx',
+                     orig / 'pTW/gui/interface.mbs', '102', font),
+    ]}
+
+
+REGIONS = {'usa': build_usa, 'eu': build_eu, 'jp': build_jp, 'asia': build_asia, 'asia-1.02': build_asia_102}
 
 
 def main():
@@ -144,7 +155,9 @@ def main():
     orig, out, work = Path(args.orig), Path(args.out), Path(args.work)
     work.mkdir(parents=True, exist_ok=True)
     out.mkdir(parents=True, exist_ok=True)
-    templates = load_templates(Path(args.english) if args.english else orig / 'US/Manual', work)
+    templates = None
+    if args.region != 'asia-1.02':
+        templates = load_templates(Path(args.english) if args.english else orig / 'US/Manual', work)
     for name, targets in REGIONS[args.region](orig, templates, args.font).items():
         keys = [(archive.lower(), entry.lower()) for archive, entry, _, _ in targets]
         assert len(keys) == len(set(keys)), f'{name}: an entry is listed twice for an archive'

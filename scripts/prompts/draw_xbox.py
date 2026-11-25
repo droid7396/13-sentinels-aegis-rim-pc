@@ -76,8 +76,12 @@ SPRITES = {
 }
 SPRITES['jp103'] = SPRITES['jp100']
 SPRITES['tw'] = SPRITES['100']
+# The Asian 1.02 (ROBO_PATCH2_CN) reads the same atlas arrangement and button quads as the USA update, but its table
+# holds two extra quads between #227 and #236, so from #236 on the indices shift by two: the digits and the second logo.
+SPRITES['cn102'] = {**SPRITES['102'], 'digits': {'B': 242, 'T': 247}, 'logos': [201, 238]}
 # The atlas arrangement each layout reads: the base one or the rearranged one of the updates.
-ATLAS_OF = {'100': '100', '102': '102', 'jp100': '100', 'jp103': '100', 'jp104': '102', 'cn': '100', 'tw': '100'}
+ATLAS_OF = {'100': '100', '102': '102', 'jp100': '100', 'jp103': '100', 'jp104': '102', 'cn': '100', 'tw': '100',
+            'cn102': '102'}
 # BUTTON_BATSU draws the Cross outline and glow as a "+" sprite turned 45 degrees counter-clockwise on screen.
 TURNED = {('outline', 'cross'): 45, ('glow', 'cross'): 45}
 # Flat shapes no sprite entry names on its own (found by matching the flat shapes against the whole atlas), per atlas.

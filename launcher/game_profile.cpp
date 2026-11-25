@@ -44,6 +44,8 @@ constexpr const char* kUpdatePromptArchives[] = {"ROBO_US.CPK",        "ROBO_FR.
 constexpr const char* kJapanBasePromptArchives[] = {"ROBO.CPK"};
 constexpr const char* kJapanUpdatePromptArchives[] = {"ROBO.CPK", "ROBO_PATCH.CPK"};
 constexpr const char* kAsiaPromptArchives[] = {"ROBO_CN.CPK", "ROBO_TW.CPK"};
+// 1.02 reads its button atlas from the ROBO_PATCH2 archives, like the USA/EUR update.
+constexpr const char* kAsia102PromptArchives[] = {"ROBO_PATCH2_CN.CPK", "ROBO_PATCH2_TW.CPK"};
 
 constexpr TextLanguage kLanguages[] = {
     {"english", "English", 1, "ROBO_US.CPK"}, {"french", "French", 2, "ROBO_FR.CPK"}, {"german", "German", 4, "ROBO_GE.CPK"},
@@ -195,13 +197,13 @@ constexpr GameBuild kGameBuilds[] = {
      .extra_files = kAsiaFiles, .label = "CUSA18093 1.00 Asia", .region = "Asia", .layers = kAsiaBaseLayers,
      .resolution_sites = kResolutionSitesAsia100, .text_languages = kAsianLanguages,
      .prompt_archives = kAsiaPromptArchives, .english_voices = false, .prompt_patch = "asia-1.00", .voice_archive = "ROBO_CN.CPK"},
-    // The 2025 Asian reissue (CUSA18093 VERSION 01.02, a gd package). Its executable differs from 1.00, so its
-    // feature sites are not yet located: it renders at its native size until they are added.
+    // The 2025 Asian reissue (CUSA18093 VERSION 01.02, a gd package). Its executable differs from 1.00, so it carries
+    // its own feature sites (located in its boot image) and reads its atlas from the PATCH2 archives.
     {.title_id = "CUSA18093", .content_id = kAsiaContent, .version = "1.02", .folder = "CUSA18093-1.02",
      .eboot_sha256 = "4efe0907a8705486ad123c938729c775fa32ed3f4875a82f75b8b5672a8ea1d6", .regional_archive = "ROBO_CN.CPK",
      .extra_files = kAsiaFiles102, .label = "CUSA18093 1.02 Asia", .region = "Asia", .layers = kAsia102Layers,
      .resolution_sites = kResolutionSitesAsia102, .text_languages = kAsianLanguages,
-     .prompt_archives = kAsiaPromptArchives, .english_voices = false, .prompt_patch = "asia-1.00", .voice_archive = "ROBO_CN.CPK"},
+     .prompt_archives = kAsia102PromptArchives, .english_voices = false, .prompt_patch = "asia-1.02", .voice_archive = "ROBO_CN.CPK"},
 };
 
 bool SameLayer(const PackageLayer& a, const PackageLayer& b) {

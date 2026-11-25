@@ -20,5 +20,7 @@ extern const uint8_t kXboxPromptsJapan104Patch[];
 extern const size_t kXboxPromptsJapan104PatchSize;
 extern const uint8_t kXboxPromptsAsia100Patch[];
 extern const size_t kXboxPromptsAsia100PatchSize;
+extern const uint8_t kXboxPromptsAsia102Patch[];
+extern const size_t kXboxPromptsAsia102PatchSize;
 
 } // namespace tsr

@@ -174,6 +174,7 @@ std::span<const uint8_t> XboxPromptsPatch(const GameBuild& build) {
         {"jp-1.03", kXboxPromptsJapan103Patch, &kXboxPromptsJapan103PatchSize},
         {"jp-1.04", kXboxPromptsJapan104Patch, &kXboxPromptsJapan104PatchSize},
         {"asia-1.00", kXboxPromptsAsia100Patch, &kXboxPromptsAsia100PatchSize},
+        {"asia-1.02", kXboxPromptsAsia102Patch, &kXboxPromptsAsia102PatchSize},
     };
     for (const auto& patch : kPatches) {
         if (patch.key == build.prompt_patch) {
